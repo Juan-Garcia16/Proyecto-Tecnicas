@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function DocenteForm() {
+export default function DocenteForm({ onAgregar }) {
   const [nombre, setNombre] = useState('');
   const [asignatura, setAsignatura] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -13,9 +13,18 @@ export default function DocenteForm() {
       setMensaje('Por favor, complete todos los campos.');
       return;
     }
-    // Aquí iría lógica para enviar o guardar datos
+
+    const nuevoContenido = {
+      docente: nombre,
+      asignatura,
+      descripcion,
+      archivo: archivo ? archivo.name : null,
+    };
+
+    onAgregar(nuevoContenido);
+
     setMensaje(`Contenido enviado para ${asignatura} por ${nombre}`);
-    
+
     // Limpiar formulario
     setNombre('');
     setAsignatura('');
@@ -27,7 +36,7 @@ export default function DocenteForm() {
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white rounded shadow-md mt-6">
       <h2 className="text-xl font-semibold mb-4">Formulario para docentes</h2>
-      <form onSubmit={handleSubmit} aria-label="Formulario para subir metodología y contenido">
+      <form onSubmit={handleSubmit}>
         <label className="block mb-2" htmlFor="nombreDocente">
           Nombre del docente
         </label>

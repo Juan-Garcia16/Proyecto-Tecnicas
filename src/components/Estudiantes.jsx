@@ -1,37 +1,13 @@
 import React, { useState } from 'react';
 
-const contenidosSimulados = [
-  {
-    id: 1,
-    asignatura: 'Matemáticas',
-    docente: 'Ana Pérez',
-    descripcion: 'Metodología basada en videos subtitulados y ejercicios prácticos.',
-    archivo: null,
-  },
-  {
-    id: 2,
-    asignatura: 'Física',
-    docente: 'Carlos Gómez',
-    descripcion: 'Uso de gráficos interactivos y resúmenes con lenguaje sencillo.',
-    archivo: 'fisica-metodologia.pdf',
-  },
-  {
-    id: 3,
-    asignatura: 'Literatura',
-    docente: 'Luisa Fernández',
-    descripcion: 'Lecturas adaptadas y debates en grupo con interpretación.',
-    archivo: null,
-  },
-];
-
-export default function Estudiantes() {
+export default function Estudiantes({ contenidos }) {
   const [filtro, setFiltro] = useState('');
 
-  const asignaturasUnicas = [...new Set(contenidosSimulados.map(c => c.asignatura))];
+  const asignaturasUnicas = [...new Set(contenidos.map(c => c.asignatura))];
 
   const contenidosFiltrados = filtro
-    ? contenidosSimulados.filter(c => c.asignatura === filtro)
-    : contenidosSimulados;
+    ? contenidos.filter(c => c.asignatura === filtro)
+    : contenidos;
 
   return (
     <section className="max-w-3xl mx-auto p-6 bg-white rounded shadow-md mt-6">

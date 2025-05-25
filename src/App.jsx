@@ -1,9 +1,7 @@
-import Estudiantes from './components/Estudiantes.jsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import DocenteForm from './components/DocenteForm.jsx';
-
-
+import Estudiantes from './components/Estudiantes.jsx';
 
 function Home() {
   return (
@@ -18,18 +16,35 @@ function Home() {
   );
 }
 
-function Docentes({ onAgregarAsignatura }) {
-  return (
-    <main className="p-6 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Sección para Docentes</h2>
-      <p className="mb-6">Desde aquí podrás subir tus metodologías y materiales para hacerlos accesibles.</p>
-      <DocenteForm onAgregarAsignatura={onAgregarAsignatura} />
-    </main>
-  );
-}
-
-
 function App() {
+  const [contenidos, setContenidos] = useState([
+    {
+      id: 1,
+      asignatura: 'Matemáticas',
+      docente: 'Ana Pérez',
+      descripcion: 'Metodología basada en videos subtitulados y ejercicios prácticos.',
+      archivo: null,
+    },
+    {
+      id: 2,
+      asignatura: 'Física',
+      docente: 'Carlos Gómez',
+      descripcion: 'Uso de gráficos interactivos y resúmenes con lenguaje sencillo.',
+      archivo: 'fisica-metodologia.pdf',
+    },
+    {
+      id: 3,
+      asignatura: 'Literatura',
+      docente: 'Luisa Fernández',
+      descripcion: 'Lecturas adaptadas y debates en grupo con interpretación.',
+      archivo: null,
+    },
+  ]);
+
+  const agregarContenido = (nuevoContenido) => {
+    setContenidos(prev => [...prev, { id: prev.length + 1, ...nuevoContenido }]);
+  };
+
   return (
     <>
       <header className="bg-gray-800 text-white p-4">
@@ -44,10 +59,10 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/estudiantes" element={<Estudiantes />} />
-        <Route path="/docentes" element={<Docentes />} />
+        <Route path="/estudiantes" element={<Estudiantes contenidos={contenidos} />} />
+        <Route path="/docentes" element={<DocenteForm onAgregar={agregarContenido} />} />
       </Routes>
-      
+
       <footer className="bg-gray-100 text-center p-4 mt-12 text-gray-700">
         © 2025 Plataforma Inclusiva - Universidad Tecnológica de Pereira
       </footer>
