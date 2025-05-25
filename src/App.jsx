@@ -1,7 +1,7 @@
+import Estudiantes from './components/Estudiantes.jsx';
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import DocenteForm from './components/DocenteForm.jsx';
-import Estudiantes from './components/Estudiantes.jsx';
 
 function Home() {
   return (
@@ -16,7 +16,22 @@ function Home() {
   );
 }
 
+function Docentes({ contenidos, setContenidos }) {
+  const agregarContenido = (nuevoContenido) => {
+    setContenidos([...contenidos, { id: contenidos.length + 1, ...nuevoContenido }]);
+  };
+
+  return (
+    <main className="p-6 max-w-3xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-4">Sección para Docentes</h2>
+      <p className="mb-6">Desde aquí podrás subir tus metodologías y materiales para hacerlos accesibles.</p>
+      <DocenteForm onAgregarAsignatura={agregarContenido} />
+    </main>
+  );
+}
+
 function App() {
+  // Estado global que guarda todos los contenidos con sus archivos (en memoria)
   const [contenidos, setContenidos] = useState([
     {
       id: 1,
@@ -24,13 +39,15 @@ function App() {
       docente: 'Ana Pérez',
       descripcion: 'Metodología basada en videos subtitulados y ejercicios prácticos.',
       archivo: null,
+      archivoURL: null,
     },
     {
       id: 2,
       asignatura: 'Física',
       docente: 'Carlos Gómez',
       descripcion: 'Uso de gráficos interactivos y resúmenes con lenguaje sencillo.',
-      archivo: 'fisica-metodologia.pdf',
+      archivo: null,
+      archivoURL: null,
     },
     {
       id: 3,
@@ -38,12 +55,9 @@ function App() {
       docente: 'Luisa Fernández',
       descripcion: 'Lecturas adaptadas y debates en grupo con interpretación.',
       archivo: null,
+      archivoURL: null,
     },
   ]);
-
-  const agregarContenido = (nuevoContenido) => {
-    setContenidos(prev => [...prev, { id: prev.length + 1, ...nuevoContenido }]);
-  };
 
   return (
     <>
@@ -56,11 +70,11 @@ function App() {
           </div>
         </nav>
       </header>
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/estudiantes" element={<Estudiantes contenidos={contenidos} />} />
-        <Route path="/docentes" element={<DocenteForm onAgregar={agregarContenido} />} />
+        <Route path="/docentes" element={<Docentes contenidos={contenidos} setContenidos={setContenidos} />} />
       </Routes>
 
       <footer className="bg-gray-100 text-center p-4 mt-12 text-gray-700">

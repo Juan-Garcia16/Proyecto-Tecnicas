@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function DocenteForm({ onAgregar }) {
+export default function DocenteForm({ onAgregarAsignatura }) {
   const [nombre, setNombre] = useState('');
   const [asignatura, setAsignatura] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -14,14 +14,19 @@ export default function DocenteForm({ onAgregar }) {
       return;
     }
 
-    const nuevoContenido = {
+    // Crear URL local para el archivo
+    let archivoURL = null;
+    if (archivo) {
+      archivoURL = URL.createObjectURL(archivo);
+    }
+
+    onAgregarAsignatura({
       docente: nombre,
       asignatura,
       descripcion,
-      archivo: archivo ? archivo.name : null,
-    };
-
-    onAgregar(nuevoContenido);
+      archivo,
+      archivoURL,
+    });
 
     setMensaje(`Contenido enviado para ${asignatura} por ${nombre}`);
 
@@ -36,7 +41,7 @@ export default function DocenteForm({ onAgregar }) {
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white rounded shadow-md mt-6">
       <h2 className="text-xl font-semibold mb-4">Formulario para docentes</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} aria-label="Formulario para subir metodología y contenido">
         <label className="block mb-2" htmlFor="nombreDocente">
           Nombre del docente
         </label>

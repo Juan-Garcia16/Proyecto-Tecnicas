@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 export default function Estudiantes({ contenidos }) {
   const [filtro, setFiltro] = useState('');
 
+  // Extraemos asignaturas únicas del contenido actual
   const asignaturasUnicas = [...new Set(contenidos.map(c => c.asignatura))];
 
   const contenidosFiltrados = filtro
@@ -31,17 +32,16 @@ export default function Estudiantes({ contenidos }) {
       {contenidosFiltrados.length === 0 ? (
         <p>No hay contenidos disponibles para esta asignatura.</p>
       ) : (
-        contenidosFiltrados.map(({ id, asignatura, docente, descripcion, archivo }) => (
+        contenidosFiltrados.map(({ id, asignatura, docente, descripcion, archivoURL }) => (
           <article key={id} className="mb-4 border-b pb-4">
             <h3 className="text-lg font-semibold">{asignatura}</h3>
             <p><strong>Docente:</strong> {docente}</p>
             <p><strong>Descripción:</strong> {descripcion}</p>
-            {archivo && (
+            {archivoURL && (
               <p>
                 <a
-                  href={`/archivos/${archivo}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={archivoURL}
+                  download
                   className="text-blue-600 underline"
                 >
                   Descargar archivo
