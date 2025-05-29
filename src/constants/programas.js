@@ -5,10 +5,13 @@ export const PROGRAMAS = [
   'Ingeniería Eléctrica',
   'Ingeniería Mecánica',
   'Ingeniería Electrónica',
-  'Ingeniería Química',
-  'Ingeniería Ambiental',
-  'Ingeniería de Telecomunicaciones',
-  'Ingeniería de Materiales',
+  'Ingeniería en Procesos Agroindustriales',
+  'Ingeniería Física',
+  'Tecnología en Desarrollo de Software',
+  'Tecnología Química',
+  'Matemáticas',
+  'Física',
+  'Química Industrial',
 ];
 
 export const SEMESTRES = [
