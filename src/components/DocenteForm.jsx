@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PROGRAMAS, SEMESTRES } from '../constants/programas.js';
+import { Link } from 'react-router-dom';
 
 export default function DocenteForm({ onAgregarAsignatura }) {
   const [nombre, setNombre] = useState('');
@@ -47,7 +48,12 @@ export default function DocenteForm({ onAgregarAsignatura }) {
 
   return (
     <section className="max-w-2xl mx-auto p-6 bg-white rounded shadow-md mt-6">
-      <h2 className="text-xl font-semibold mb-4">Formulario para docentes</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold">Formulario para docentes</h2>
+        <Link to="/plataforma" className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-semibold shadow hover:bg-blue-200 transition-all ml-4 whitespace-nowrap">
+          ← Volver
+        </Link>
+      </div>
       <form onSubmit={handleSubmit} aria-label="Formulario para subir metodología y contenido">
         <label className="block mb-2" htmlFor="nombreDocente">
           Nombre del docente

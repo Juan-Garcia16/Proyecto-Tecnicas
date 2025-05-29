@@ -2,6 +2,7 @@ import Estudiantes from './components/Estudiantes.jsx';
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import DocenteForm from './components/DocenteForm.jsx';
+import PresentacionProyecto from './pages/PresentacionProyecto.jsx';
 
 function Home() {
   return (
@@ -16,8 +17,8 @@ function Home() {
           <span className="text-green-700 font-semibold">¡Una educación accesible para todos!</span>
         </p>
         <nav className="flex gap-6 mt-4">
-          <Link to="/estudiantes" className="px-6 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition-all duration-200">Estudiantes</Link>
-          <Link to="/docentes" className="px-6 py-2 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition-all duration-200">Docentes</Link>
+          <Link to="/plataforma/estudiantes" className="px-6 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition-all duration-200">Estudiantes</Link>
+          <Link to="/plataforma/docentes" className="px-6 py-2 bg-green-600 text-white rounded-full font-semibold shadow hover:bg-green-700 transition-all duration-200">Docentes</Link>
         </nav>
       </div>
     </main>
@@ -81,9 +82,14 @@ function App() {
 
       <div className="flex-1 flex flex-col">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/estudiantes" element={<Estudiantes contenidos={contenidos} />} />
-          <Route path="/docentes" element={<Docentes contenidos={contenidos} setContenidos={setContenidos} />} />
+          <Route path="/" element={<PresentacionProyecto />} />
+          <Route path="/plataforma/*" element={
+            <Routes>
+              <Route path="" element={<Home />} />
+              <Route path="estudiantes" element={<Estudiantes contenidos={contenidos} />} />
+              <Route path="docentes" element={<Docentes contenidos={contenidos} setContenidos={setContenidos} />} />
+            </Routes>
+          } />
         </Routes>
       </div>
 
