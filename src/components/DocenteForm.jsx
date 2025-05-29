@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PROGRAMAS, SEMESTRES } from '../constants/programas.js';
 
 export default function DocenteForm({ onAgregarAsignatura }) {
   const [nombre, setNombre] = useState('');
@@ -6,10 +7,12 @@ export default function DocenteForm({ onAgregarAsignatura }) {
   const [descripcion, setDescripcion] = useState('');
   const [archivo, setArchivo] = useState(null);
   const [mensaje, setMensaje] = useState('');
+  const [programa, setPrograma] = useState('');
+  const [semestre, setSemestre] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nombre || !asignatura || !descripcion) {
+    if (!nombre || !asignatura || !descripcion || !programa || !semestre) {
       setMensaje('Por favor, complete todos los campos.');
       return;
     }
@@ -26,6 +29,8 @@ export default function DocenteForm({ onAgregarAsignatura }) {
       descripcion,
       archivo,
       archivoURL,
+      programa,
+      semestre,
     });
 
     setMensaje(`Contenido enviado para ${asignatura} por ${nombre}`);
@@ -35,6 +40,8 @@ export default function DocenteForm({ onAgregarAsignatura }) {
     setAsignatura('');
     setDescripcion('');
     setArchivo(null);
+    setPrograma('');
+    setSemestre('');
     e.target.reset();
   };
 
@@ -77,6 +84,38 @@ export default function DocenteForm({ onAgregarAsignatura }) {
           onChange={(e) => setDescripcion(e.target.value)}
           required
         />
+
+        <label className="block mb-2" htmlFor="programa">
+          Programa académico
+        </label>
+        <select
+          id="programa"
+          className="w-full p-2 border rounded mb-4"
+          value={programa}
+          onChange={e => setPrograma(e.target.value)}
+          required
+        >
+          <option value="">-- Seleccione un programa --</option>
+          {PROGRAMAS.map(p => (
+            <option key={p} value={p}>{p}</option>
+          ))}
+        </select>
+
+        <label className="block mb-2" htmlFor="semestre">
+          Semestre
+        </label>
+        <select
+          id="semestre"
+          className="w-full p-2 border rounded mb-4"
+          value={semestre}
+          onChange={e => setSemestre(e.target.value)}
+          required
+        >
+          <option value="">-- Seleccione un semestre --</option>
+          {SEMESTRES.map(s => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
 
         <label className="block mb-2" htmlFor="archivo">
           Subir archivo (opcional)
