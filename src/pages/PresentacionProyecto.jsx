@@ -5,7 +5,7 @@ export default function PresentacionProyecto() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-green-100 p-6">
       <div className="bg-white/90 rounded-2xl shadow-2xl p-10 max-w-3xl w-full flex flex-col items-center border border-blue-100">
-        <img src="/src/assets/Logoutp.webp" alt="Logo UTP" className="w-32 h-32 mb-6 drop-shadow-lg" />
+        <img src="/Logoutp.webp" alt="Logo UTP" className="w-32 h-32 mb-6 drop-shadow-lg" />
         <h1 className="text-4xl font-extrabold mb-4 text-blue-800 text-center drop-shadow-lg">
           Plataforma Inclusiva UTP
         </h1>

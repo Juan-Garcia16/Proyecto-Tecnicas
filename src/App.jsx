@@ -8,7 +8,7 @@ function Home() {
   return (
     <main className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-green-100 p-6">
       <div className="bg-white/90 rounded-xl shadow-2xl p-10 max-w-xl w-full flex flex-col items-center border border-blue-100">
-        <img src="/src/assets/Logoutp.webp" alt="Logo UTP" className="w-28 h-28 mb-4 drop-shadow-lg animate-bounce" />
+        <img src="/Logoutp.webp" alt="Logo UTP" className="w-28 h-28 mb-4 drop-shadow-lg animate-bounce" />
         <h1 className="text-4xl font-extrabold mb-3 text-blue-800 text-center drop-shadow-lg">
           Bienvenido a la Plataforma Inclusiva UTP
         </h1>
